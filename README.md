@@ -21,7 +21,7 @@ The following rules apply:
 
 ![image](Image2.png)
 
-	the script will first create an empty structure. To this structure it will add PTV1 with no margin. After that it will add to the previous result PTV2 with no margin again. And then it will subtract from the previous structure the spinal cord prv which will be expanded before subtraction with a margin of 5 mm.
+the script will first create an empty structure. To this structure it will add PTV1 with no margin. After that it will add to the previous result PTV2 with no margin again. And then it will subtract from the previous structure the spinal cord prv which will be expanded before subtraction with a margin of 5 mm.
 
 2. Operations on structures of mixed resolution are not possible. If at least one structure is of High Resolution, you have to manually allow the script to convert all structure to High Resolution. When doing so, existing structures are not modified, but are copied and the conversion is performed on the copy.
 
