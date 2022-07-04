@@ -1,0 +1,267 @@
+﻿<Window x:Class="StructureMargins.MarginsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StructureMargins"
+             mc:Ignorable="d" 
+             Height="550" Width="780" WindowStartupLocation="CenterScreen" Title="Create new structure" Background="AliceBlue">
+    <Window.Resources>
+        <Style x:Key="ComboBoxDropdownStyle" TargetType="ComboBox">
+            <Setter Property="IsDropDownOpen" Value="True" />
+        </Style>
+        <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,0,10,0" />
+        </Style>
+        <Style x:Key="ColumnElementStyle2" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}"/>
+        <Style TargetType="{x:Type Label}"/>
+        <Style TargetType="{x:Type Border}"/>
+        <Style TargetType="{x:Type CheckBox}"/>
+        <Style TargetType="{x:Type DataGrid}"/>
+        <Style TargetType="{x:Type ListView}"/>
+        <Style TargetType="{x:Type ListViewItem}"/>
+        <Style TargetType="{x:Type ToolTip}"/>
+        <Style TargetType="{x:Type TextBlock}"/>
+        <Style TargetType="{x:Type StackPanel}"/>
+        <Style TargetType="{x:Type GroupBox}"/>
+        <Style TargetType="{x:Type ScrollBar}"/>
+        <Style TargetType="{x:Type TabControl}"/>
+        <Style TargetType="{x:Type TabItem}"/>
+        <Style TargetType="{x:Type TextBox}"/>
+    </Window.Resources>
+
+
+    <Grid Margin="10,10,10,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Padding="5">
+            <GroupBox.Header>
+                <TextBlock>New structure</TextBlock>
+            </GroupBox.Header>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="Dicom type:" Grid.Column="0"></Label>
+                <ComboBox x:Name="ComboBoxDicomType" Grid.Column="1" Width="150" SelectionChanged="ComboBoxDicomType_SelectionChanged"></ComboBox>
+                <Label Content="New structure name:" Grid.Column="2"></Label>
+                <TextBox x:Name="TextBoxStructureName" Grid.Column="3" Width="150" VerticalContentAlignment="Center" TextChanged="TextBoxStructureName_TextChanged"></TextBox>
+                <Label x:Name="LabelCanAddStructure" Content="" Grid.Column="4"></Label>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Padding="5" Margin="0,5,0,0">
+            <GroupBox.Header>
+                <TextBlock>Formula</TextBlock>
+            </GroupBox.Header>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"  Content="Structure selection"></Label>
+                        <DataGrid x:Name="DataGrid1" Grid.Row="1" Grid.Column="0" Margin="0,0,0,5" SelectionMode="Single" IsReadOnly="True" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" EnableRowVirtualization="False" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Header="Structure" Width="0.4*" Binding="{Binding Structure, Mode=TwoWay, NotifyOnTargetUpdated=False}" ElementStyle="{StaticResource ColumnElementStyle}">
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Dicom type" Width="0.3*" Binding="{Binding DicomType, Mode=TwoWay, NotifyOnTargetUpdated=False}" ElementStyle="{StaticResource ColumnElementStyle}">
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="High res?" Width="0.3*" Binding="{Binding IsHighRes, Mode=TwoWay, NotifyOnTargetUpdated=False}" ElementStyle="{StaticResource ColumnElementStyle}">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="{Binding ColorSet}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+
+                        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="0" Margin="5,0,5,5" Width="40" Click="Button_Click" ToolTip="Add structure.">
+                                <TextBlock FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center">
+                                   &#x002B;
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Row="1" Margin="5,0,5,5" Width="40"  Click="Button_Click_1" ToolTip="Subtract structure.">
+                                <TextBlock FontSize="20" FontWeight="Bold" Foreground="Blue" VerticalAlignment="Center">
+                                   &#x2212;
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Row="2" Margin="5,0,5,5" Width="40"  Click="Button_Click_2" ToolTip="Intersect structure.">
+                                <TextBlock FontSize="20" FontWeight="Bold" Foreground="Orange" VerticalAlignment="Center">
+                                   &#x2336;
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Row="3" Margin="5,0,5,5" Width="40" ToolTip="Calculate XOR." Click="Button_Click_7">
+                                <TextBlock FontSize="20" FontWeight="Bold" Foreground="Green" VerticalAlignment="Center">
+                                   &#x2295;
+                                </TextBlock>
+                            </Button>
+
+                            <Button Grid.Row="4" Margin="5,15,5,5" Width="40" Click="Button_Click_3" ToolTip="Remove operation.">
+                                <TextBlock FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center"> 
+                                     &#x00D7;
+                                </TextBlock>
+                            </Button>
+                            <Button Grid.Row="5" Margin="5,0,5,5" Width="40" Click="Button_Click_4" ToolTip="Clear all operations.">
+                                <TextBlock FontSize="20" FontWeight="Normal" Foreground="Violet" VerticalAlignment="Center">
+                                     &#x1F5D1;
+                                </TextBlock>
+                            </Button>
+                        </Grid>
+
+
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Column="1" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0"  Content="Selected operations"></Label>
+
+                    <DataGrid x:Name="DataGrid2" Grid.Row="1" Margin="0,0,0,5" SelectionMode="Single" IsReadOnly="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" EnableRowVirtualization="False" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="25" Header="" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Operation, Mode=TwoWay, NotifyOnSourceUpdated=False}" Foreground="{Binding OperationColor, Mode=TwoWay}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn IsReadOnly="True" Header="Structure" Width="0.5*" Binding="{Binding Structure, Mode=TwoWay, NotifyOnTargetUpdated=False}" ElementStyle="{StaticResource ColumnElementStyle}">
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="Margin [mm]" Width="0.5*" IsReadOnly="False" Binding="{Binding Margin, Mode=TwoWay, NotifyOnTargetUpdated=False}" ElementStyle="{StaticResource ColumnElementStyle}">
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <EventSetter Event="TextChanged" Handler="OnTextChanged" />
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Padding="5">
+            <GroupBox.Header>
+                <TextBlock>Other options</TextBlock>
+            </GroupBox.Header>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="CheckBoxClipSkin" Grid.Column="0" VerticalContentAlignment="Center" VerticalAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" ToolTip="Clip the final structure (result of all operations) under the body with a margin.">Clip under body with margin [mm]</CheckBox>
+                    <TextBox x:Name="TextBoxClipSkinMargin" Grid.Column="1" Width="50" Height="25" Margin="5,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center" IsEnabled="False"></TextBox>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="CheckBoxAllowHighResConversion" Grid.Column="0" VerticalContentAlignment="Center" VerticalAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" IsEnabled="False" ToolTip="Operacije so možne samo na strukturah enake resolucije. Pred operacijo bo struktura kopirana v začasno in pretvorjena v visoko resolucijo. Originalna struktura bo nedotaknjena.">
+                        <TextBlock>
+                            Allow conversion to <Italic>High resolution segment</Italic>.
+                        </TextBlock>
+                    </CheckBox>
+                </Grid>
+
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="0,5,15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal">
+                <Button Content="Create" Width="60" Height="30" Click="Button_Click_6"></Button>
+                <Button Margin="10,0,0,0" Content="Exit" Width="60" Height="30" Click="Button_Click_5"></Button>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
