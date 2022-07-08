@@ -25,7 +25,7 @@ the script will first create an empty structure. To this structure it will add P
 
 2. Operations on structures of mixed resolution are not possible. If at least one structure is of High Resolution, you have to manually allow the script to convert all structure to High Resolution. When doing so, existing structures are not modified, but are copied and the conversion is performed on the copy.
 
-3. Clipping under the body uses the structure of "EXTERNAL" type as the body. Body is copied to a temp structure and shrunk by the selected margin (negative sign of the margin is applied in the code). Then the intersection of the new body and the structure following all the defined operations is calculated.
+3. Clipping under the body uses the structure of "EXTERNAL" type as the body. Body is copied to a temp structure and shrunk by the selected margin (negative sign of the margin is applied in the code). Then the intersection of the new body and the structure resulting from all the defined operations is calculated.
 
 ## Log
 
